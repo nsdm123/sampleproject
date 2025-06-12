@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Books</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+
+    <h2>Add a New Book</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Book ID:</label><br>
+        <input type="number" name="book_id" required><br>
+
+        <label>Book Name:</label><br>
+        <input type="text" name="book_name" required><br>
+
+        <label>Book Content:</label><br>
+        <textarea name="book_content" required></textarea><br>
+
+        <label>Author:</label><br>
+        <input type="text" name="author" required><br><br>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Your Books</h2>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <strong>{{ book.book_name }}</strong> by {{ book.author }}<br>
+                    {{ book.book_content|truncatewords:20 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books added yet.</p>
+    {% endif %}
+
+    <br><a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

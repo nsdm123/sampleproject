@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain Tumor Detection</title>
+</head>
+<body>
+    <h2>Upload an MRI Image</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image" required>
+    <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <p>Prediction: {{ prediction }}</p>
+    {% endif %}
+
+</body>
+</html>
